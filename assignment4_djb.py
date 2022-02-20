@@ -65,6 +65,7 @@ for bool_feature in bool_features:
 # In[6]:
 
 
+print()
 for strg_feature in strg_features:
     # Print current feature's unique values
     print('Feature {}, Unique values = {}'.format(strg_feature, len(data[strg_feature].unique())))
@@ -77,7 +78,7 @@ for strg_feature in strg_features:
     for i in range(cur_one_hot.shape[1]): cols_to_add.append(strg_feature+'_'+str(i))
     # Drop categorical feature and replace it with one-hot-encoded version
     data = data.drop(strg_feature, axis=1)
-    data[cols_to_add] = cur_one_hot
+    data = pd.concat([data,pd.DataFrame(cur_one_hot,columns=cols_to_add)], axis=1)
 
 
 # In[8]:
